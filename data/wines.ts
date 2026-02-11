@@ -46,7 +46,7 @@ export const wines: Wine[] = [
     priceGlass: 14,
     priceBottle: 58,
     priceShop: 48,
-    image: "https://images.unsplash.com/photo-1569236882653-8798028f4254?w=600&h=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1566995541428-f2246c17cda1?w=600&h=800&fit=crop",
     featured: true,
   },
   {
@@ -231,7 +231,7 @@ export const wines: Wine[] = [
     priceGlass: 0,
     priceBottle: 0,
     priceShop: 350,
-    image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=600&h=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1609951651556-5334e2706168?w=600&h=800&fit=crop",
     isGiftBox: true,
   },
 ];
