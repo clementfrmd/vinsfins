@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const { t } = useLanguage();
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,73 +19,43 @@ export default function Footer() {
     <footer className="bg-charcoal text-cream/50">
       <div className="mx-auto px-4 sm:px-8 lg:px-20 py-16 sm:py-24 lg:py-32">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 sm:gap-16 mb-16 sm:mb-20 text-center sm:text-left">
-          {/* Brand */}
           <div>
             <h3 className="font-playfair text-3xl text-cream mb-6 font-normal">Vins Fins</h3>
-            <p className="text-sm leading-[1.9] font-light">
-              Bar à vins & restaurant in the heart of Luxembourg&apos;s historic Grund
-              neighborhood. Curated wines, inspired cuisine, unforgettable moments.
-            </p>
+            <p className="text-sm leading-[1.9] font-light">{t("footer.brandDesc")}</p>
           </div>
-
-          {/* Quick Links */}
           <div>
-            <h4 className="text-[11px] uppercase tracking-luxury text-cream/30 mb-6 sm:mb-8">Explore</h4>
+            <h4 className="text-[11px] uppercase tracking-luxury text-cream/30 mb-6 sm:mb-8">{t("footer.explore")}</h4>
             <ul className="space-y-4 text-sm font-light">
-              <li><Link href="/wines" className="hover:text-cream transition-colors duration-500">Our Wines</Link></li>
-              <li><Link href="/menu" className="hover:text-cream transition-colors duration-500">Menu</Link></li>
-              <li><Link href="/shop" className="hover:text-cream transition-colors duration-500">Boutique</Link></li>
-              <li><Link href="/about" className="hover:text-cream transition-colors duration-500">Maison</Link></li>
-              <li><Link href="/contact" className="hover:text-cream transition-colors duration-500">Contact</Link></li>
+              <li><Link href="/wines" className="hover:text-cream transition-colors duration-500">{t("footer.ourWines")}</Link></li>
+              <li><Link href="/menu" className="hover:text-cream transition-colors duration-500">{t("footer.menu")}</Link></li>
+              <li><Link href="/shop" className="hover:text-cream transition-colors duration-500">{t("footer.shop")}</Link></li>
+              <li><Link href="/about" className="hover:text-cream transition-colors duration-500">{t("footer.about")}</Link></li>
+              <li><Link href="/contact" className="hover:text-cream transition-colors duration-500">{t("footer.contact")}</Link></li>
             </ul>
           </div>
-
-          {/* Contact Info */}
           <div>
-            <h4 className="text-[11px] uppercase tracking-luxury text-cream/30 mb-6 sm:mb-8">Visit</h4>
+            <h4 className="text-[11px] uppercase tracking-luxury text-cream/30 mb-6 sm:mb-8">{t("footer.visit")}</h4>
             <ul className="space-y-4 text-sm font-light">
               <li>18 Rue Münster</li>
               <li>Grund, Luxembourg</li>
-              <li className="pt-2">
-                <a href="tel:+352123456" className="hover:text-cream transition-colors duration-500">+352 12 34 56</a>
-              </li>
-              <li>
-                <a href="mailto:hello@vinsfins.lu" className="hover:text-cream transition-colors duration-500">hello@vinsfins.lu</a>
-              </li>
-              <li className="pt-2 leading-[1.9]">
-                Tue–Sat: 12h–14h30, 18h30–23h<br />
-                Sun: 12h–15h · Mon: Fermé
-              </li>
+              <li className="pt-2"><a href="tel:+352123456" className="hover:text-cream transition-colors duration-500">+352 12 34 56</a></li>
+              <li><a href="mailto:hello@vinsfins.lu" className="hover:text-cream transition-colors duration-500">hello@vinsfins.lu</a></li>
+              <li className="pt-2 leading-[1.9]">{t("footer.hours")}<br />{t("footer.hoursSun")}</li>
             </ul>
           </div>
-
-          {/* Newsletter */}
           <div>
-            <h4 className="text-[11px] uppercase tracking-luxury text-cream/30 mb-6 sm:mb-8">Newsletter</h4>
-            <p className="text-sm mb-6 font-light leading-[1.9]">
-              Wine events, new arrivals, and exclusive offers.
-            </p>
+            <h4 className="text-[11px] uppercase tracking-luxury text-cream/30 mb-6 sm:mb-8">{t("footer.newsletter")}</h4>
+            <p className="text-sm mb-6 font-light leading-[1.9]">{t("footer.newsletterDesc")}</p>
             {subscribed ? (
-              <p className="text-gold text-sm font-light">Merci. À bientôt.</p>
+              <p className="text-gold text-sm font-light">{t("footer.subscribed")}</p>
             ) : (
               <form onSubmit={handleSubscribe} className="space-y-4">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your email"
-                  required
-                  className="w-full bg-transparent border-b border-cream/15 px-0 py-3 text-sm text-cream placeholder:text-cream/20 focus:outline-none focus:border-gold/50 focus:ring-0 transition-colors duration-500 appearance-none rounded-none"
-                />
-                <button type="submit" className="text-[11px] uppercase tracking-luxury text-cream/40 hover:text-cream border-b border-cream/15 pb-1 transition-colors duration-500 min-h-[44px] inline-flex items-center">
-                  Subscribe
-                </button>
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t("footer.yourEmail")} required className="w-full bg-transparent border-b border-cream/15 px-0 py-3 text-sm text-cream placeholder:text-cream/20 focus:outline-none focus:border-gold/50 focus:ring-0 transition-colors duration-500 appearance-none rounded-none" />
+                <button type="submit" className="text-[11px] uppercase tracking-luxury text-cream/40 hover:text-cream border-b border-cream/15 pb-1 transition-colors duration-500 min-h-[44px] inline-flex items-center">{t("footer.subscribe")}</button>
               </form>
             )}
           </div>
         </div>
-
-        {/* Social + Bottom */}
         <div className="border-t border-cream/8 pt-10 flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
           <div className="flex gap-8 sm:gap-6">
             <a href="https://instagram.com/vins_fins_grund" target="_blank" rel="noopener noreferrer" className="hover:text-cream transition-colors duration-500 min-w-[44px] min-h-[44px] flex items-center justify-center" aria-label="Instagram">
@@ -96,11 +68,11 @@ export default function Footer() {
               <svg className="w-5 h-5 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
             </a>
           </div>
-          <p className="text-[11px] text-cream/25 tracking-wider">© 2026 Vins Fins. All rights reserved.</p>
+          <p className="text-[11px] text-cream/25 tracking-wider">{t("footer.copyright")}</p>
           <div className="flex gap-8 text-[11px] text-cream/25 tracking-wide">
-            <a href="#" className="hover:text-cream/50 transition-colors duration-500">Privacy</a>
-            <a href="#" className="hover:text-cream/50 transition-colors duration-500">Terms</a>
-            <a href="#" className="hover:text-cream/50 transition-colors duration-500">Imprint</a>
+            <a href="#" className="hover:text-cream/50 transition-colors duration-500">{t("footer.privacy")}</a>
+            <a href="#" className="hover:text-cream/50 transition-colors duration-500">{t("footer.terms")}</a>
+            <a href="#" className="hover:text-cream/50 transition-colors duration-500">{t("footer.imprint")}</a>
           </div>
         </div>
       </div>
