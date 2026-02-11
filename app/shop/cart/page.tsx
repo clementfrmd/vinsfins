@@ -10,62 +10,46 @@ export default function CartPage() {
 
   return (
     <div className="pt-20">
-      <section className="section-padding">
-        <div className="container-custom mx-auto max-w-4xl">
-          <h1 className="font-playfair text-2xl sm:text-3xl lg:text-4xl mb-6 sm:mb-8">{t("cart.title")}</h1>
+      <section className="px-4 sm:px-8 lg:px-20 py-12 sm:py-20 lg:py-32">
+        <div className="max-w-3xl mx-auto">
+          <h1 className="font-playfair text-2xl sm:text-3xl mb-8">{t("cart.title")}</h1>
 
           {items.length === 0 ? (
             <div className="text-center py-16">
-              <p className="text-charcoal/50 text-lg mb-6">{t("cart.empty")}</p>
+              <p className="text-xs text-charcoal/35 font-light mb-6">{t("cart.empty")}</p>
               <Link href="/shop" className="btn-primary">{t("cart.continueShopping")}</Link>
             </div>
           ) : (
             <>
-              <div className="space-y-4 sm:space-y-6 mb-8">
+              <div className="space-y-0">
                 {items.map((item) => (
-                  <div key={item.wine.id} className="flex flex-col sm:flex-row gap-4 sm:gap-6 bg-white p-4 sm:p-6 rounded-sm">
-                    <div className="flex gap-4 sm:gap-6">
-                      <div className="w-20 h-28 flex-shrink-0 overflow-hidden rounded">
-                        <img src={item.wine.image} alt={item.wine.name} className="w-full h-full object-cover" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-playfair text-lg">{item.wine.name}</h3>
-                        <p className="text-sm text-charcoal/50">{item.wine.vintage} · {item.wine.region}</p>
-                        <p className="text-burgundy font-bold mt-2">€{item.wine.priceShop}</p>
-                      </div>
+                  <div key={item.wine.id} className="flex items-center gap-4 sm:gap-6 py-5 border-b border-charcoal/5">
+                    <div className="w-14 h-18 flex-shrink-0 overflow-hidden">
+                      <img src={item.wine.image} alt={item.wine.name} className="w-full h-full object-cover" />
                     </div>
-                    <div className="flex items-center justify-between sm:flex-col sm:items-end sm:justify-between sm:min-w-[140px]">
-                      <div className="flex items-center gap-3">
-                        <button onClick={() => updateQuantity(item.wine.id, item.quantity - 1)} className="w-[44px] h-[44px] sm:w-8 sm:h-8 rounded border border-charcoal/20 flex items-center justify-center hover:bg-burgundy hover:text-cream hover:border-burgundy transition-colors">−</button>
-                        <span className="font-semibold w-8 text-center">{item.quantity}</span>
-                        <button onClick={() => updateQuantity(item.wine.id, item.quantity + 1)} className="w-[44px] h-[44px] sm:w-8 sm:h-8 rounded border border-charcoal/20 flex items-center justify-center hover:bg-burgundy hover:text-cream hover:border-burgundy transition-colors">+</button>
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <span className="font-bold text-lg">€{(item.wine.priceShop * item.quantity).toFixed(2)}</span>
-                        <button onClick={() => removeFromCart(item.wine.id)} className="text-charcoal/40 hover:text-red-500 text-sm min-w-[44px] min-h-[44px] flex items-center justify-center">{t("cart.remove")}</button>
-                      </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-playfair text-sm">{item.wine.name}</h3>
+                      <p className="text-[10px] text-charcoal/30">{item.wine.vintage} · {item.wine.region}</p>
                     </div>
+                    <div className="flex items-center gap-2">
+                      <button onClick={() => updateQuantity(item.wine.id, item.quantity - 1)} className="w-7 h-7 border border-charcoal/10 flex items-center justify-center text-xs">−</button>
+                      <span className="text-xs w-4 text-center">{item.quantity}</span>
+                      <button onClick={() => updateQuantity(item.wine.id, item.quantity + 1)} className="w-7 h-7 border border-charcoal/10 flex items-center justify-center text-xs">+</button>
+                    </div>
+                    <span className="text-sm w-16 text-right">€{(item.wine.priceShop * item.quantity).toFixed(2)}</span>
+                    <button onClick={() => removeFromCart(item.wine.id)} className="text-charcoal/20 hover:text-charcoal/50 text-[10px] tracking-wider uppercase min-w-[44px] min-h-[44px] flex items-center justify-center">{t("cart.remove")}</button>
                   </div>
                 ))}
               </div>
 
-              <div className="bg-white p-5 sm:p-8 rounded-sm">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-charcoal/60">{t("cart.subtotal")}</span>
-                  <span className="font-semibold">€{totalPrice.toFixed(2)}</span>
+              <div className="mt-8 pt-6 border-t border-charcoal/5">
+                <div className="flex justify-between items-baseline mb-6">
+                  <span className="text-[10px] uppercase tracking-luxury text-charcoal/30">{t("cart.total")}</span>
+                  <span className="font-playfair text-xl">€{(totalPrice + (totalPrice >= 100 ? 0 : 9.9)).toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-charcoal/60">{t("cart.shipping")}</span>
-                  <span className="text-sm text-charcoal/50">{totalPrice >= 100 ? t("cart.free") : "€9.90"}</span>
-                </div>
-                <div className="border-t border-charcoal/10 my-4" />
-                <div className="flex justify-between items-center mb-6">
-                  <span className="font-playfair text-xl">{t("cart.total")}</span>
-                  <span className="font-playfair text-2xl font-bold text-burgundy">€{(totalPrice + (totalPrice >= 100 ? 0 : 9.9)).toFixed(2)}</span>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex gap-4">
                   <Link href="/shop/checkout" className="btn-primary text-center flex-1">{t("cart.checkout")}</Link>
-                  <button onClick={clearCart} className="btn-outline text-center">{t("cart.clearCart")}</button>
+                  <button onClick={clearCart} className="btn-outline">{t("cart.clearCart")}</button>
                 </div>
               </div>
             </>

@@ -17,142 +17,44 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-playfair font-normal;
   }
-  /* Better focus states for form inputs */
   input:focus, select:focus, textarea:focus {
-    @apply outline-none ring-1 ring-burgundy/40 border-burgundy/60;
-    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    @apply outline-none ring-0 border-charcoal/30;
+    transition: border-color 0.3s ease;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-burgundy text-cream px-10 py-4 font-light tracking-luxury uppercase text-xs
-    hover:bg-burgundy/85 transition-all duration-600 inline-block border border-burgundy;
+    @apply bg-charcoal text-cream px-8 py-3 font-light tracking-luxury uppercase text-[10px]
+    hover:bg-charcoal/80 transition-all duration-500 inline-block;
   }
   .btn-outline {
-    @apply border border-charcoal/30 text-charcoal px-10 py-4 font-light tracking-luxury uppercase text-xs
-    hover:bg-charcoal hover:text-cream transition-all duration-600 inline-block;
-  }
-  .btn-gold {
-    @apply bg-gold/90 text-charcoal px-10 py-4 font-light tracking-luxury uppercase text-xs
-    hover:bg-gold transition-all duration-600 inline-block;
-  }
-  .section-padding {
-    @apply px-4 sm:px-8 lg:px-16 py-12 sm:py-20 lg:py-36;
-  }
-  .container-custom {
-    @apply max-w-7xl mx-auto;
+    @apply border border-charcoal/15 text-charcoal px-8 py-3 font-light tracking-luxury uppercase text-[10px]
+    hover:border-charcoal/40 transition-all duration-500 inline-block;
   }
 }
 
-/* Reveal on scroll */
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Stagger children */
-.reveal-stagger > * {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0); }
-.reveal-stagger.visible > *:nth-child(2) { transition-delay: 100ms; opacity: 1; transform: translateY(0); }
-.reveal-stagger.visible > *:nth-child(3) { transition-delay: 200ms; opacity: 1; transform: translateY(0); }
-.reveal-stagger.visible > *:nth-child(4) { transition-delay: 300ms; opacity: 1; transform: translateY(0); }
-.reveal-stagger.visible > *:nth-child(5) { transition-delay: 400ms; opacity: 1; transform: translateY(0); }
-.reveal-stagger.visible > *:nth-child(6) { transition-delay: 500ms; opacity: 1; transform: translateY(0); }
-
-/* Fade in animation */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeInSlow {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+/* Animations */
 @keyframes slideInRight {
   from { transform: translateX(100%); }
   to { transform: translateX(0); }
-}
-@keyframes slideOutRight {
-  from { transform: translateX(0); }
-  to { transform: translateX(100%); }
 }
 @keyframes fadeInOverlay {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-.animate-fade-in {
-  animation: fadeIn 1.2s ease forwards;
-}
-.animate-fade-in-up {
-  animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-}
-.animate-fade-in-slow {
-  animation: fadeInSlow 1.5s ease 0.3s forwards;
-  opacity: 0;
-}
-.animate-fade-in-delayed {
-  animation: fadeInSlow 1.5s ease 0.6s forwards;
-  opacity: 0;
-}
-.animate-fade-in-delayed-2 {
-  animation: fadeInSlow 1.5s ease 0.9s forwards;
-  opacity: 0;
-}
 .animate-slide-in-right {
-  animation: slideInRight 0.4s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+  animation: slideInRight 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
 }
 .animate-fade-in-overlay {
-  animation: fadeInOverlay 0.3s ease forwards;
+  animation: fadeInOverlay 0.2s ease forwards;
 }
 
-/* Parallax */
-.parallax-slow {
-  will-change: transform;
-}
-
-/* Wine card hover — no hover on touch devices */
-.wine-card {
-  @apply transition-all duration-700;
-}
-@media (hover: hover) {
-  .wine-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 20px 60px rgba(26, 26, 26, 0.06);
-  }
-}
-
-/* Elegant divider */
-.divider-gold {
-  @apply w-12 h-px bg-gold mx-auto;
-}
-
-/* Thin separator */
-.separator {
-  @apply border-t border-charcoal/5;
-}
-
-/* Selection */
 ::selection {
-  background-color: rgba(184, 160, 126, 0.3);
+  background-color: rgba(140, 58, 62, 0.15);
 }
 
-/* Mobile: no horizontal overflow anywhere */
 *, *::before, *::after {
   max-width: 100vw;
 }

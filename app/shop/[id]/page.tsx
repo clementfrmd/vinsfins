@@ -14,54 +14,46 @@ export default function ProductDetailPage() {
 
   if (!wine) {
     return (
-      <div className="pt-20 section-padding text-center">
-        <h1 className="font-playfair text-3xl">{t("product.notFound")}</h1>
-        <Link href="/shop" className="btn-outline mt-6 inline-block">{t("product.backToShopBtn")}</Link>
+      <div className="pt-20 px-4 sm:px-8 lg:px-20 py-24 text-center">
+        <h1 className="font-playfair text-2xl">{t("product.notFound")}</h1>
+        <Link href="/shop" className="text-[10px] tracking-luxury uppercase text-charcoal/40 hover:text-charcoal border-b border-charcoal/15 pb-1 mt-6 inline-block">{t("product.backToShopBtn")}</Link>
       </div>
     );
   }
 
   return (
     <div className="pt-20">
-      <section className="section-padding">
-        <div className="container-custom mx-auto">
-          <Link href="/shop" className="text-burgundy text-sm font-semibold uppercase tracking-wide hover:text-burgundy/70 mb-6 sm:mb-8 inline-block pt-2 sm:pt-0">{t("product.backToShop")}</Link>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
-            <div className="aspect-[3/4] bg-white rounded-sm overflow-hidden">
+      <section className="px-4 sm:px-8 lg:px-20 py-12 sm:py-20 lg:py-32">
+        <div className="max-w-6xl mx-auto">
+          <Link href="/shop" className="text-[10px] tracking-luxury uppercase text-charcoal/30 hover:text-charcoal mb-8 inline-block transition-colors duration-500">{t("product.backToShop")}</Link>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-16">
+            <div className="aspect-[3/4] overflow-hidden">
               <img src={wine.image} alt={wine.name} className="w-full h-full object-cover" />
             </div>
             <div className="flex flex-col justify-center">
-              {wine.isGiftBox && <span className="text-xs bg-gold/20 text-gold px-3 py-1 rounded-full font-semibold uppercase w-fit mb-4">{t("shop.giftBox")}</span>}
-              <p className="uppercase tracking-[0.2em] text-gold text-sm mb-2">{wine.region}</p>
-              <h1 className="font-playfair text-2xl sm:text-3xl lg:text-4xl mb-2">{wine.name}</h1>
-              <p className="text-charcoal/50 mb-4 sm:mb-6 text-sm sm:text-base">{wine.grape} · {wine.vintage} · {wine.country}</p>
-              <div className="text-burgundy font-bold text-2xl sm:text-3xl mb-4 sm:mb-6">€{wine.priceShop}</div>
-              <p className="text-charcoal/70 leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">{wine.description}</p>
-              <div className="bg-burgundy/5 rounded-sm p-4 sm:p-6 mb-6 sm:mb-8">
-                <h3 className="font-playfair text-lg mb-2">{t("product.tastingNotes")}</h3>
-                <p className="text-charcoal/70 italic text-sm sm:text-base">&ldquo;{wine.tastingNotes}&rdquo;</p>
+              <p className="text-[10px] uppercase tracking-luxury text-charcoal/25 mb-2">{wine.region}</p>
+              <h1 className="font-playfair text-2xl sm:text-3xl mb-2">{wine.name}</h1>
+              <p className="text-xs text-charcoal/35 mb-6 font-light">{wine.grape} · {wine.vintage}</p>
+              <p className="text-lg mb-6">€{wine.priceShop}</p>
+              <p className="text-xs text-charcoal/40 font-light leading-relaxed mb-8">{wine.description}</p>
+              <div className="border-t border-charcoal/5 pt-6 mb-8">
+                <p className="text-[10px] uppercase tracking-luxury text-charcoal/25 mb-2">{t("product.tastingNotes")}</p>
+                <p className="text-xs text-charcoal/50 font-light italic leading-relaxed">{wine.tastingNotes}</p>
               </div>
               {!wine.isGiftBox && (
-                <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8 text-sm">
-                  <div className="bg-white p-3 sm:p-4 rounded-sm">
-                    <span className="text-charcoal/50 text-xs sm:text-sm">{t("product.byTheGlass")}</span>
-                    <span className="block font-bold text-lg text-burgundy mt-1">€{wine.priceGlass}</span>
-                  </div>
-                  <div className="bg-white p-3 sm:p-4 rounded-sm">
-                    <span className="text-charcoal/50 text-xs sm:text-sm">{t("product.atRestaurant")}</span>
-                    <span className="block font-bold text-lg text-charcoal mt-1">€{wine.priceBottle}</span>
-                  </div>
+                <div className="flex gap-6 mb-8 text-xs text-charcoal/35 font-light">
+                  <span>{t("product.byTheGlass")}: €{wine.priceGlass}</span>
+                  <span>{t("product.atRestaurant")}: €{wine.priceBottle}</span>
                 </div>
               )}
               <div className="hidden sm:block">
-                <button onClick={() => addToCart(wine)} className="btn-primary text-center text-lg py-4 w-full">{t("product.addToCart")} — €{wine.priceShop}</button>
+                <button onClick={() => addToCart(wine)} className="btn-primary w-full text-center">{t("product.addToCart")} — €{wine.priceShop}</button>
               </div>
-              <p className="text-xs text-charcoal/40 mt-4 text-center hidden sm:block">{t("product.freeDelivery")}</p>
             </div>
           </div>
         </div>
       </section>
-      <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-cream/95 backdrop-blur-md border-t border-charcoal/10 p-4 z-40">
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-cream/95 backdrop-blur-md border-t border-charcoal/5 p-4 z-40">
         <button onClick={() => addToCart(wine)} className="btn-primary text-center w-full py-4 text-base">{t("product.addToCart")} — €{wine.priceShop}</button>
       </div>
     </div>
