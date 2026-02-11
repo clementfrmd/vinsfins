@@ -44,9 +44,15 @@
     @apply bg-charcoal text-cream px-8 py-3 font-light tracking-luxury uppercase text-[10px]
     hover:bg-charcoal/80 transition-all duration-500 inline-block;
   }
+  [data-theme="dark"] .btn-primary {
+    @apply bg-cream text-charcoal hover:bg-cream/80;
+  }
   .btn-outline {
     @apply border border-charcoal/15 text-charcoal px-8 py-3 font-light tracking-luxury uppercase text-[10px]
     hover:border-charcoal/40 transition-all duration-500 inline-block;
+  }
+  [data-theme="dark"] .btn-outline {
+    @apply border-cream/20 text-cream hover:border-cream/40;
   }
 }
 

@@ -20,7 +20,7 @@ export default function CookieBanner() {
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-charcoal text-cream p-4 sm:p-6">
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-charcoal dark:bg-[#2a2a2a] text-cream p-4 sm:p-6">
       <div className="container-custom mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-sm text-cream/80 text-center sm:text-left">{t("cookie.message")}</p>
         <div className="flex gap-3 flex-shrink-0">
