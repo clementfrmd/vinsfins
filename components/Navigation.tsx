@@ -106,24 +106,42 @@ export default function Navigation() {
           </div>
         </div>
 
-        {/* Mobile menu */}
+        {/* Mobile menu — full screen overlay */}
         {isOpen && (
-          <div className="lg:hidden bg-cream/98 backdrop-blur-md pb-8 pt-4 px-2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="block py-4 px-2 text-charcoal text-[11px] tracking-luxury uppercase hover:opacity-50 transition-opacity duration-500"
-              >
-                {link.label}
+          <div className="lg:hidden fixed inset-0 top-0 left-0 w-full h-full bg-cream z-50 flex flex-col">
+            {/* Mobile menu header */}
+            <div className="flex items-center justify-between h-20 px-4 sm:px-8">
+              <Link href="/" onClick={() => setIsOpen(false)} className="font-playfair text-xl tracking-wide text-charcoal">
+                Vins Fins
               </Link>
-            ))}
-            <div className="pt-6 px-2">
+              <button
+                onClick={() => setIsOpen(false)}
+                className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-charcoal"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            {/* Links */}
+            <div className="flex-1 flex flex-col justify-center px-8">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className="block py-5 text-charcoal font-playfair text-2xl hover:opacity-50 transition-opacity duration-500"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+            {/* Reserve CTA */}
+            <div className="px-8 pb-12">
               <Link
                 href="/contact#reservation"
                 onClick={() => setIsOpen(false)}
-                className="btn-primary block text-center text-[11px]"
+                className="btn-primary block text-center"
               >
                 Réserver une Table
               </Link>
