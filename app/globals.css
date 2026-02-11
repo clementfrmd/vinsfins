@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+3:ital,wght@0,200;0,300;0,400;0,600;0,700;1,300;1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -9,55 +9,119 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-cream text-charcoal font-sans;
+    @apply bg-cream text-charcoal font-sans font-light;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-playfair;
+    @apply font-playfair font-normal;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-burgundy text-cream px-8 py-3 rounded-sm font-semibold tracking-wide uppercase text-sm
-    hover:bg-burgundy/90 transition-all duration-300 inline-block;
+    @apply bg-burgundy text-cream px-10 py-4 font-light tracking-luxury uppercase text-xs
+    hover:bg-burgundy/85 transition-all duration-600 inline-block border border-burgundy;
   }
   .btn-outline {
-    @apply border-2 border-burgundy text-burgundy px-8 py-3 rounded-sm font-semibold tracking-wide uppercase text-sm
-    hover:bg-burgundy hover:text-cream transition-all duration-300 inline-block;
+    @apply border border-charcoal/30 text-charcoal px-10 py-4 font-light tracking-luxury uppercase text-xs
+    hover:bg-charcoal hover:text-cream transition-all duration-600 inline-block;
   }
   .btn-gold {
-    @apply bg-gold text-charcoal px-8 py-3 rounded-sm font-semibold tracking-wide uppercase text-sm
-    hover:bg-gold/90 transition-all duration-300 inline-block;
+    @apply bg-gold/90 text-charcoal px-10 py-4 font-light tracking-luxury uppercase text-xs
+    hover:bg-gold transition-all duration-600 inline-block;
   }
   .section-padding {
-    @apply px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24;
+    @apply px-6 sm:px-10 lg:px-16 py-20 sm:py-28 lg:py-36;
   }
   .container-custom {
     @apply max-w-7xl mx-auto;
   }
 }
 
-/* Scroll reveal animation */
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0); }
+.reveal-stagger.visible > *:nth-child(2) { transition-delay: 100ms; opacity: 1; transform: translateY(0); }
+.reveal-stagger.visible > *:nth-child(3) { transition-delay: 200ms; opacity: 1; transform: translateY(0); }
+.reveal-stagger.visible > *:nth-child(4) { transition-delay: 300ms; opacity: 1; transform: translateY(0); }
+.reveal-stagger.visible > *:nth-child(5) { transition-delay: 400ms; opacity: 1; transform: translateY(0); }
+.reveal-stagger.visible > *:nth-child(6) { transition-delay: 500ms; opacity: 1; transform: translateY(0); }
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInSlow {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
+.animate-fade-in {
+  animation: fadeIn 1.2s ease forwards;
+}
 .animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out forwards;
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+.animate-fade-in-slow {
+  animation: fadeInSlow 1.5s ease 0.3s forwards;
+  opacity: 0;
+}
+.animate-fade-in-delayed {
+  animation: fadeInSlow 1.5s ease 0.6s forwards;
+  opacity: 0;
+}
+.animate-fade-in-delayed-2 {
+  animation: fadeInSlow 1.5s ease 0.9s forwards;
+  opacity: 0;
 }
 
-/* Wine card hover effect */
+/* Parallax */
+.parallax-slow {
+  will-change: transform;
+}
+
+/* Wine card hover */
 .wine-card {
-  @apply transition-all duration-300;
+  @apply transition-all duration-700;
 }
 .wine-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(114, 47, 55, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 60px rgba(26, 26, 26, 0.06);
+}
+
+/* Elegant divider */
+.divider-gold {
+  @apply w-12 h-px bg-gold mx-auto;
+}
+
+/* Thin separator */
+.separator {
+  @apply border-t border-charcoal/5;
+}
+
+/* Selection */
+::selection {
+  background-color: rgba(184, 160, 126, 0.3);
 }

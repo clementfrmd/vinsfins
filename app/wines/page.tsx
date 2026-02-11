@@ -19,28 +19,28 @@ export default function WinesPage() {
   });
 
   return (
-    <div className="pt-20">
+    <div>
       {/* Hero */}
-      <section className="relative py-24 overflow-hidden">
+      <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=1920&h=600&fit=crop')" }} />
-        <div className="absolute inset-0 bg-charcoal/60" />
-        <div className="relative z-10 text-center text-cream px-4">
-          <p className="uppercase tracking-[0.2em] text-gold text-sm mb-4">Our Collection</p>
-          <h1 className="font-playfair text-4xl sm:text-5xl font-bold">Wine List</h1>
+        <div className="absolute inset-0 bg-charcoal/50" />
+        <div className="relative z-10 text-center text-cream px-6">
+          <p className="uppercase tracking-luxury text-gold/70 text-[11px] mb-6">Notre Collection</p>
+          <h1 className="font-playfair text-5xl sm:text-6xl lg:text-7xl font-normal">Wine List</h1>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-custom mx-auto">
           {/* Filters */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-12">
-            <div className="flex flex-wrap gap-2 justify-center">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-16 pb-8 border-b border-charcoal/5">
+            <div className="flex flex-wrap gap-3 justify-center">
               <button
                 onClick={() => setActiveCategory("all")}
-                className={`px-4 py-2 rounded-sm text-sm font-semibold transition-colors ${
+                className={`px-5 py-2.5 text-[11px] tracking-luxury uppercase transition-all duration-500 ${
                   activeCategory === "all"
-                    ? "bg-burgundy text-cream"
-                    : "bg-white text-charcoal hover:bg-burgundy/10"
+                    ? "bg-charcoal text-cream"
+                    : "text-charcoal/40 hover:text-charcoal"
                 }`}
               >
                 All Wines
@@ -49,20 +49,20 @@ export default function WinesPage() {
                 <button
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id)}
-                  className={`px-4 py-2 rounded-sm text-sm font-semibold transition-colors ${
+                  className={`px-5 py-2.5 text-[11px] tracking-luxury uppercase transition-all duration-500 ${
                     activeCategory === cat.id
-                      ? "bg-burgundy text-cream"
-                      : "bg-white text-charcoal hover:bg-burgundy/10"
+                      ? "bg-charcoal text-cream"
+                      : "text-charcoal/40 hover:text-charcoal"
                   }`}
                 >
-                  {cat.emoji} {cat.label}
+                  {cat.label}
                 </button>
               ))}
             </div>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="bg-white border border-charcoal/10 rounded-sm px-4 py-2 text-sm focus:outline-none focus:border-burgundy"
+              className="bg-transparent border-b border-charcoal/15 px-0 py-2 text-xs text-charcoal/50 focus:outline-none focus:border-charcoal/30 tracking-wide"
             >
               <option value="name">Sort by Name</option>
               <option value="price-asc">Price: Low to High</option>
@@ -72,34 +72,32 @@ export default function WinesPage() {
           </div>
 
           {/* Wine Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
             {sorted.map((wine) => (
-              <div key={wine.id} className="wine-card bg-white rounded-sm overflow-hidden group">
-                <div className="aspect-[3/4] overflow-hidden">
+              <div key={wine.id} className="wine-card group">
+                <div className="aspect-[3/4] overflow-hidden mb-6">
                   <img
                     src={wine.image}
                     alt={wine.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
                   />
                 </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xs uppercase tracking-wider text-gold">{wine.category}</span>
-                    <span className="text-charcoal/30">·</span>
-                    <span className="text-xs text-charcoal/50">{wine.region}</span>
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-[10px] uppercase tracking-luxury text-gold/70">{wine.category}</span>
+                  <span className="text-charcoal/15">·</span>
+                  <span className="text-[10px] text-charcoal/30 tracking-wider">{wine.region}</span>
+                </div>
+                <h3 className="font-playfair text-xl mb-2">{wine.name}</h3>
+                <p className="text-xs text-charcoal/35 mb-3 font-light">{wine.grape} · {wine.vintage}</p>
+                <p className="text-sm text-charcoal/45 mb-5 italic font-light leading-relaxed">&ldquo;{wine.tastingNotes}&rdquo;</p>
+                <div className="flex items-center justify-between pt-5 border-t border-charcoal/5">
+                  <div>
+                    <span className="text-burgundy text-lg">€{wine.priceGlass}</span>
+                    <span className="text-charcoal/30 text-xs ml-1 font-light">/ glass</span>
                   </div>
-                  <h3 className="font-playfair text-xl mb-1">{wine.name}</h3>
-                  <p className="text-sm text-charcoal/50 mb-3">{wine.grape} · {wine.vintage}</p>
-                  <p className="text-sm text-charcoal/70 mb-4 italic">&ldquo;{wine.tastingNotes}&rdquo;</p>
-                  <div className="flex items-center justify-between pt-4 border-t border-charcoal/5">
-                    <div>
-                      <span className="text-burgundy font-bold text-lg">€{wine.priceGlass}</span>
-                      <span className="text-charcoal/50 text-sm ml-1">/ glass</span>
-                    </div>
-                    <div>
-                      <span className="text-charcoal font-semibold">€{wine.priceBottle}</span>
-                      <span className="text-charcoal/50 text-sm ml-1">/ bottle</span>
-                    </div>
+                  <div>
+                    <span className="text-charcoal/60">€{wine.priceBottle}</span>
+                    <span className="text-charcoal/30 text-xs ml-1 font-light">/ bottle</span>
                   </div>
                 </div>
               </div>
