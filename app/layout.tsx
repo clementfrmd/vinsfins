@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import CartSidebar from "@/components/CartSidebar";
 import { CartProvider } from "@/context/CartContext";
 import { LanguageProvider } from "@/context/LanguageContext";
 
@@ -51,8 +52,9 @@ export default function RootLayout({
         <LanguageProvider>
           <CartProvider>
             <Navigation />
-            <main className="relative z-[1] min-h-screen">{children}</main>
+            {children}
             <Footer />
+            <CartSidebar />
           </CartProvider>
         </LanguageProvider>
       </body>
