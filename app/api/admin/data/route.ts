@@ -3,11 +3,12 @@ import { readFile, writeFile, mkdir } from "fs/promises";
 import { join } from "path";
 import { menuItems } from "@/data/menu";
 import { wines } from "@/data/wines";
+import { siteContent } from "@/data/content";
 
 const DATA_DIR = join(process.cwd(), ".data");
 
 async function ensureDir() {
-  try { await mkdir(DATA_DIR, { recursive: true }); } catch {}
+  try { await mkdir(DATA_DIR, { recursive: true }); } catch { /* ignore */ }
 }
 
 async function loadJSON(file: string, fallback: unknown) {
@@ -36,7 +37,7 @@ export async function GET(req: NextRequest) {
   const type = req.nextUrl.searchParams.get("type");
   if (type === "menu") return NextResponse.json(await loadJSON("menu.json", menuItems));
   if (type === "wines") return NextResponse.json(await loadJSON("wines.json", wines));
-  if (type === "content") return NextResponse.json(await loadJSON("content.json", {}));
+  if (type === "content") return NextResponse.json(await loadJSON("content.json", siteContent));
   return NextResponse.json({ error: "Invalid type" }, { status: 400 });
 }
 
